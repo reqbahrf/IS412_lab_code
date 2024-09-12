@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="../src/output.css" />
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header  -->
+    <header class="fixed w-full bg-teal-800 text-white">
+      <div
+        class="container mx-auto flex items-center justify-between px-4 py-4"
+      >
+        <h1 class="text-3xl font-bold">Malativas.com</h1>
+      </div>
+    </header>
+    <div class="h-dvh">
+      <div class="grid md:grid-cols-4 gap-4 pt-20 px-6">
+        <!-- table container -->
+        <div class="md:col-span-3 bg-white rounded-lg shadow-lg p-4">
+          <div class="flex items-center justify-end mb-4">
+            <input type="text" id="search" name="search" placeholder="Search product" class="w-1/4 px-4 py-2 border-2 border-gray-300 rounded-full" />
+          </div>
+          <table class="table-auto w-full">
+            <thead>
+              <tr>
+                <th class="px-4 py-2">ID</th>
+                <th class="px-4 py-2">Product Name</th>
+                <th class="px-4 py-2">Product Category</th>
+                <th class="px-4 py-2">Quantity</th>
+                <th class="px-4 py-2">Price</th>
+                <th class="px-4 py-2">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border">
+                <td class="border px-4 py-2">1</td>
+                <td class="border px-4 py-2">Product 1</td>
+                <td class="border px-4 py-2">Category 1</td>
+                <td class="border px-4 py-2">10</td>
+                <td class="border px-4 py-2">$10.00</td>
+                <td class="text-center">
+                  <button class="bg-green-500 px-2 py-2 text-white">Order</button>
+                  <button class="bg-blue-500 px-2 py-2 text-white">Edit</button>
+                  <button class="bg-red-500 px-2 py-2 text-white">Delete</button>
+                </td>
+              </tr>
+              <tr class="border">
+                <td class="border px-4 py-2">2</td>
+                <td class="border px-4 py-2">Product 2</td>
+                <td class="border px-4 py-2">Category 2</td>
+                <td class="border px-4 py-2">5</td>
+                <td class="border px-4 py-2">$5.00</td>
+                <td class="text-center">
+                  <button class="bg-green-500 px-2 py-2 text-white">Order</button>
+                  <button class="bg-blue-500 px-2 py-2 text-white">Edit</button>
+                  <button class="bg-red-500 px-2 py-2 text-white">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" class="border px-4 py-2 font-bold">Total</td>
+                <td class="border"></td>
+                <td class="border"></td>
+                <td class="border"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="md:col-span-1">
+          <div class="bg-white rounded-lg shadow-lg p-4">
+            <form>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label for="id" class="block text-sm font-medium text-gray-700">ID</label>
+                  <input type="number" name="id" id="id" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                </div>
+                <div>
+                  <label for="name" class="block text-sm font-medium text-gray-700">Product Name</label>
+                  <input type="text" name="name" id="name" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                </div>
+                <div>
+                  <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                  <input type="text" name="category" id="category" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                </div>
+                <div>
+                  <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
+                  <input type="number" name="quantity" id="quantity" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                </div>
+                <div>
+                  <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                  <input type="number" name="price" id="price" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                </div>
+                <div class="col-span-2">
+                  <button type="submit" class="mt-4 w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">Add Product</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <footer class="bg-teal-800 px-4 py-8 text-white">
+      <div class="container mx-auto flex justify-between">
+        <div>
+          <h2 class="text-3xl font-bold">Malativas.com</h2>
+          <p class="mt-2">Contact Us</p>
+          <p>Email: info@Malativas.com</p>
+          <p>Phone: +1 (123) 456-7890</p>
+        </div>
+        <div class="flex flex-col">
+          <h3 class="font-bold">About Us</h3>
+          <h3 class="font-bold">Follow Us</h3>
+          <div class="mt-2 flex space-x-4">
+            <!-- Social Media Icons -->
+            <a href="#" class="text-white">
+              <img
+                src="../assets_img/linkedin.png"
+                alt="LinkedIn"
+                class="h-6 w-6"
+              />
+            </a>
+            <a href="#" class="text-white">
+              <img
+                src="../assets_img/youtube-play.png"
+                alt="YouTube"
+                class="h-6 w-6"
+              />
+            </a>
+            <a href="#" class="text-white">
+              <img
+                src="../assets_img/instagram-new.png"
+                alt="Instagram"
+                class="h-6 w-6"
+              />
+            </a>
+            <a href="#" class="text-white">
+              <img
+                src="../assets_img/twitter.png"
+                alt="Twitter"
+                class="h-6 w-6"
+              />
+            </a>
+            <a href="#" class="text-white">
+              <img
+                src="../assets_img/tiktok.png"
+                alt="Tiktok"
+                class="h-6 w-6"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-6 text-center">© Malativas 2023</div>
+    </footer>
+  </body>
+</html>
