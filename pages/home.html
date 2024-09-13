@@ -10,13 +10,34 @@
     <!-- Header  -->
     <header class="fixed w-full bg-teal-800 text-white z-50">
       <div
-        class="container mx-auto flex items-center justify-between px-4 py-4"
+        class="container mx-auto flex items-center justify-between px-4 py-2"
       >
-        <h1 class="text-3xl font-bold">Malativas.com</h1>
+      <div class="relative group">
+        <div class="flex justify-between items-center py-4">
+          <h1 class="text-3xl font-bold cursor-pointer flex items-center">
+            Malaticas.com
+            <!-- Arrow Icon -->
+            <span class="ml-2 transform transition-transform duration-300 group-hover:rotate-90">
+              &gt;
+            </span>
+          </h1>
+          <div class="hidden md:block">
+            <!-- Empty to maintain spacing -->
+          </div>
+        </div>
+        <!-- Pop-up navigation links (vertically) -->
+        <div class="absolute left-0 w-full bg-white rounded-lg hidden group-hover:block ring-1 ring-teal-600">
+            <a href="#" class="flex items-center px-4 py-3 text-lg font-medium border-b text-black hover:text-teal-600">Dashboard</a>
+            <a href="#" class="flex items-center px-4 py-3 text-lg font-medium border-b text-black hover:text-teal-600">Products</a>
+            <a href="#" class="flex items-center px-4 py-3 text-lg font-medium border-b text-black hover:text-teal-600">Users</a>
+            <a href="#" class="flex items-center px-4 py-3 text-lg font-medium border-b text-black hover:text-teal-600">Settings</a>
+        </div>
+      </div>
+
         <div class="flex items-center justify-end gap-4">
 
           <!-- bell Icon -->
-          <div class="relative">
+          <div class="relative group">
             <div class="absolute right-0 top-0 p-2">
               <span class="inline-block h-3 w-3 rounded-full bg-red-600"></span>
             </div>
@@ -36,10 +57,37 @@
                 />
               </svg>
             </button>
+            <div class="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg py-2 z-50 hidden group-hover:block ring-1 ring-teal-600">
+              <div class="px-4 py-2 text-gray-700 font-semibold border-b">Notifications</div>
+              <!-- Notification Item 1 -->
+              <a href="#" class="flex items-center px-4 py-3 border-b hover:bg-gray-100">
+                <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center">📦</div>
+                <div class="ml-3">
+                  <p class="text-sm text-black font-medium">New Stock added</p>
+                  <p class="text-xs text-gray-500">2 minutes ago</p>
+                </div>
+              </a>
+              <!-- Notification Item 2 -->
+              <a href="#" class="flex items-center px-4 py-3 border-b hover:bg-gray-100">
+                <div class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center">🎉</div>
+                <div class="ml-3">
+                  <p class="text-sm text-black font-medium">You have a new follower!</p>
+                  <p class="text-xs text-gray-500">10 minutes ago</p>
+                </div>
+              </a>
+              <!-- Notification Item 3 -->
+              <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-100">
+                <div class="w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center">📦</div>
+                <div class="ml-3">
+                  <p class="text-sm text-black font-medium">Stock is running out</p>
+                  <p class="text-xs text-gray-500">30 minutes ago</p>
+                </div>
+              </a>
+            </div>
           </div>
 
           <!-- Profile Icon -->
-          <div class="relative">
+          <div class="relative group">
             <button
               class="flex h-10 w-10 items-center justify-center rounded-full bg-white text-black"
             >
@@ -71,6 +119,14 @@
                 </g>
               </svg>
             </button>
+            <div class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-50 hidden group-hover:block ring-1 ring-teal-600">
+              <a href="#" class="flex text-black items-center border-b px-4 py-3 hover:bg-gray-100">
+                Profile
+              </a>
+              <a href="#" class="flex text-black items-center px-4 py-3 hover:bg-red-600 hover:text-white">
+                Logout
+              </a>
+            </div>
           </div>
         </div>
       </div>
