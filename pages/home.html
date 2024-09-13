@@ -100,6 +100,7 @@
             <thead>
               <tr>
                 <th class="px-4 py-2">#</th>
+                <th class="px-4 py-2">Product Image</th>
                 <th class="px-4 py-2">Product Name</th>
                 <th class="px-4 py-2">Product Category</th>
                 <th class="px-4 py-2">Quantity</th>
@@ -110,6 +111,7 @@
             <tbody>
               <tr class="border">
                 <td class="border-y px-4 py-2">1</td>
+                <td class="border-y px-4 py-2"><img src="" class="w-20 h-20" alt="Product Image" /></td>
                 <td class="border-y px-4 py-2">Product 1</td>
                 <td class="border-y px-4 py-2">Category 1</td>
                 <td class="border-y px-4 py-2">10</td>
@@ -126,6 +128,7 @@
               </tr>
               <tr class="border">
                 <td class="border-y px-4 py-2">2</td>
+                <td class="border-y px-4 py-2"><img src="" class="w-20 h-20" alt="Product Image" /></td>
                 <td class="border-y px-4 py-2">Product 2</td>
                 <td class="border-y px-4 py-2">Category 2</td>
                 <td class="border-y px-4 py-2">5</td>
@@ -143,7 +146,7 @@
             </tbody>
             <tfoot>
               <tr>
-                <td colspan="3" class="border px-4 py-2 font-bold">Total</td>
+                <td colspan="4" class="border px-4 py-2 font-bold">Total</td>
                 <td class="border"></td>
                 <td class="border"></td>
                 <td class="border"></td>
@@ -153,7 +156,7 @@
         </div>
 
         <!-- Add Product Container -->
-        <div class="md:col-span-1">
+        <div class="md:col-span-1 space-y-4">
           <div class="rounded-lg bg-white p-4 shadow-lg">
             <form>
               <div class="grid grid-cols-2 gap-4">
@@ -233,16 +236,12 @@
               </div>
             </form>
           </div>
-        </div>
-        <div class="col-span-1 md:col-end-5">
-          <div class="rounnded-lg bg-white p-4 shadow-lg min-h-40">
-            <span class="text-xl font-bold">Recent Order:</span>
-          </div>
-        </div>
-        <div class="col-span-1 md:col-end-5">
-          <div class="rounnded-lg bg-white p-4 shadow-lg min-h-40">
-            <span class="text-xl font-bold">Top Sold Products:</span>
-          </div>
+            <div class="rounded-lg bg-white p-4 shadow-lg min-h-40">
+              <span class="text-xl font-bold">Recent Order:</span>
+            </div>
+            <div class="rounded-lg bg-white p-4 shadow-lg min-h-40">
+              <span class="text-xl font-bold">Top Sold Products:</span>
+            </div>
         </div>
       </div>
     </div>
