@@ -8,7 +8,7 @@
   </head>
   <body class="bg-gray-100">
     <!-- Header  -->
-    <header class="fixed w-full bg-teal-800 text-white">
+    <header class="fixed w-full bg-teal-800 text-white z-50">
       <div
         class="container mx-auto flex items-center justify-between px-4 py-4"
       >
@@ -77,7 +77,7 @@
     </header>
 
    <!-- Main Content -->
-    <div class="h-dvh">
+    <div class="h-auto py-4">
       <div class="grid gap-4 px-6 pt-20 md:grid-cols-4">
         <!-- table container -->
         <div class="md:col-span-4">
@@ -85,7 +85,7 @@
             <p class="text-2xl font-bold">Welcome, John Doe</p>
           </div>
         </div>
-        <div class="rounded-lg bg-white p-4 shadow-lg md:col-span-3">
+        <div class="rounded-lg bg-white p-4 shadow-lg md:col-span-3 h-[450px] ">
           <div class="mb-4 flex items-center justify-between">
             <span class="text-xl font-bold">Products List</span>
             <input
@@ -96,63 +96,102 @@
               class="w-1/4 rounded-full border-2 border-gray-300 px-4 py-2"
             />
           </div>
-          <table class="w-full table-auto">
-            <thead>
-              <tr>
-                <th class="px-4 py-2">#</th>
-                <th class="px-4 py-2">Product Image</th>
-                <th class="px-4 py-2">Product Name</th>
-                <th class="px-4 py-2">Product Category</th>
-                <th class="px-4 py-2">Quantity</th>
-                <th class="px-4 py-2">Price</th>
-                <th class="px-4 py-2">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border">
-                <td class="border-y px-4 py-2">1</td>
-                <td class="border-y px-4 py-2"><img src="" class="w-20 h-20" alt="Product Image" /></td>
-                <td class="border-y px-4 py-2">Product 1</td>
-                <td class="border-y px-4 py-2">Category 1</td>
-                <td class="border-y px-4 py-2">10</td>
-                <td class="border-y px-4 py-2">$10.00</td>
-                <td class="text-center">
-                  <button class="bg-green-500 px-2 py-2 text-white">
-                    Order
-                  </button>
-                  <button class="bg-blue-500 px-2 py-2 text-white">Edit</button>
-                  <button class="bg-red-500 px-2 py-2 text-white">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr class="border">
-                <td class="border-y px-4 py-2">2</td>
-                <td class="border-y px-4 py-2"><img src="" class="w-20 h-20" alt="Product Image" /></td>
-                <td class="border-y px-4 py-2">Product 2</td>
-                <td class="border-y px-4 py-2">Category 2</td>
-                <td class="border-y px-4 py-2">5</td>
-                <td class="border-y px-4 py-2">$5.00</td>
-                <td class="text-center">
-                  <button class="bg-green-500 px-2 py-2 text-white">
-                    Order
-                  </button>
-                  <button class="bg-blue-500 px-2 py-2 text-white">Edit</button>
-                  <button class="bg-red-500 px-2 py-2 text-white">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="4" class="border px-4 py-2 font-bold">Total</td>
-                <td class="border"></td>
-                <td class="border"></td>
-                <td class="border"></td>
-              </tr>
-            </tfoot>
-          </table>
+          <div class="overflow-y-auto h-[330px]">
+            <table class="w-full table-auto ">
+              <thead>
+                <tr class="sticky top-0 bg-white">
+                  <th class="px-4 py-2">#</th>
+                  <th class="px-4 py-2">Product Image</th>
+                  <th class="px-4 py-2">Product Name</th>
+                  <th class="px-4 py-2">Product Category</th>
+                  <th class="px-4 py-2">Quantity</th>
+                  <th class="px-4 py-2">Price</th>
+                  <th class="px-4 py-2">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border">
+                  <td class="border-y px-4 py-2">1</td>
+                  <td class="border-y px-4 py-2"><img src="https://www.pngitem.com/pimgs/m/160-1607108_hardware-tools-png-ff-group-transparent-png.png" class="w-24 h-24 rounded-full mx-auto" alt="Product Image"></td>
+                  <td class="border-y px-4 py-2">Product 1</td>
+                  <td class="border-y px-4 py-2">Category 1</td>
+                  <td class="border-y px-4 py-2">10</td>
+                  <td class="border-y px-4 py-2">₱100.00</td>
+                  <td class="text-center">
+                    <button class="bg-green-500 px-2 py-2 text-white">
+                      Order
+                    </button>
+                    <button class="bg-blue-500 px-2 py-2 text-white">Edit</button>
+                    <button class="bg-red-500 px-2 py-2 text-white">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+                <tr class="border">
+                  <td class="border-y px-4 py-2">2</td>
+                  <td class="border-y px-4 py-2">
+                    <img src="https://unitech-ikk.com/products/specialized-building-solutions/hardware-and-tools/images/professional-hand-tools-and-equipaments/professional-hand-tools-and-equipaments.png" class="w-24 h-24 rounded-full mx-auto" alt="Product Image"></td>
+                  <td class="border-y px-4 py-2">Product 2</td>
+                  <td class="border-y px-4 py-2">Category 2</td>
+                  <td class="border-y px-4 py-2">5</td>
+                  <td class="border-y px-4 py-2">₱250.00</td>
+                  <td class="text-center">
+                    <button class="bg-green-500 px-2 py-2 text-white">
+                      Order
+                    </button>
+                    <button class="bg-blue-500 px-2 py-2 text-white">Edit</button>
+                    <button class="bg-red-500 px-2 py-2 text-white">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+                <tr class="border">
+                  <td class="border-y px-4 py-2">3</td>
+                  <td class="border-y px-4 py-2">
+                    <img src="https://unitech-ikk.com/products/specialized-building-solutions/hardware-and-tools/images/professional-hand-tools-and-equipaments/professional-hand-tools-and-equipaments.png" class="w-24 h-24 rounded-full mx-auto" alt="Product Image"></td>
+                  <td class="border-y px-4 py-2">Product 2</td>
+                  <td class="border-y px-4 py-2">Category 2</td>
+                  <td class="border-y px-4 py-2">5</td>
+                  <td class="border-y px-4 py-2">₱250.00</td>
+                  <td class="text-center">
+                    <button class="bg-green-500 px-2 py-2 text-white">
+                      Order
+                    </button>
+                    <button class="bg-blue-500 px-2 py-2 text-white">Edit</button>
+                    <button class="bg-red-500 px-2 py-2 text-white">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+                <tr class="border">
+                  <td class="border-y px-4 py-2">4</td>
+                  <td class="border-y px-4 py-2">
+                    <img src="https://unitech-ikk.com/products/specialized-building-solutions/hardware-and-tools/images/professional-hand-tools-and-equipaments/professional-hand-tools-and-equipaments.png" class="w-24 h-24 rounded-full mx-auto" alt="Product Image"></td>
+                  <td class="border-y px-4 py-2">Product 2</td>
+                  <td class="border-y px-4 py-2">Category 2</td>
+                  <td class="border-y px-4 py-2">5</td>
+                  <td class="border-y px-4 py-2">₱250.00</td>
+                  <td class="text-center">
+                    <button class="bg-green-500 px-2 py-2 text-white">
+                      Order
+                    </button>
+                    <button class="bg-blue-500 px-2 py-2 text-white">Edit</button>
+                    <button class="bg-red-500 px-2 py-2 text-white">
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot class="sticky bottom-0 bg-white">
+                <tr>
+                  <td colspan="4" class="border px-4 py-2 font-bold">Total</td>
+                  <td class="border text-center font-bold">25</td>
+                  <td class="border text-center font-bold">₱1000</td>
+                  <td class="border"></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         </div>
 
         <!-- Add Product Container -->
