@@ -785,6 +785,10 @@ video {
   width: 100%;
 }
 
+.w-2\/4 {
+  width: 50%;
+}
+
 .max-w-lg {
   max-width: 32rem;
 }
@@ -928,6 +932,14 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-teal-800\/\[0\.2\] {
+  background-color: rgb(17 94 89 / 0.2);
+}
+
+.bg-teal-800\/\[0\.4\] {
+  background-color: rgb(17 94 89 / 0.4);
+}
+
 .bg-\[url\(\'\.\.\/assets_img\/pagebackground\.webp\'\)\] {
   background-image: url('../assets_img/pagebackground.webp');
 }
@@ -957,6 +969,11 @@ video {
 
 .bg-no-repeat {
   background-repeat: no-repeat;
+}
+
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .p-2 {
@@ -1023,6 +1040,10 @@ video {
   text-align: center;
 }
 
+.text-justify {
+  text-align: justify;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -1068,6 +1089,10 @@ video {
 
 .font-semibold {
   font-weight: 600;
+}
+
+.font-light {
+  font-weight: 300;
 }
 
 .text-black {
@@ -1168,6 +1193,11 @@ video {
 .hover\:bg-teal-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(15 118 110 / var(--tw-bg-opacity));
+}
+
+.hover\:text-teal-200:hover {
+  --tw-text-opacity: 1;
+  color: rgb(153 246 228 / var(--tw-text-opacity));
 }
 
 .hover\:text-teal-600:hover {
