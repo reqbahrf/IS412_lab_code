@@ -788,3 +788,8 @@ $("[data-model]").on("click", function () {
 
 calculateTotalQuantityAndPrice();
 
+ $('.number-only').on('input', function(){
+  const input = $(this);
+  const value = input.val().replace(/[^0-9.]/g, '');
+  input.val(value);
+ });
