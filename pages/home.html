@@ -134,11 +134,8 @@
 
     <!-- Pop Taast -->
     <div id="toast" class="fixed top-20 right-0 p-4 bg-green hidden">
-      <div class="bg-green-100 border border-green-400 shadow-md rounded-lg px-4 py-3">
+      <div id="toast-content" class="shadow-md rounded-lg px-4 py-3">
         <div class="flex items-center">
-          <div class="flex-shrink-0 mr-3">
-            <span id="toast-icon" class="text-green-500">&#x2713;</span>
-          </div>
           <div id="toast-message" class="flex-1 text-sm font-medium text-gray-900">
           </div>
           <button class="ml-3 text-sm font-medium text-blue-500 hover:underline">
@@ -168,7 +165,7 @@
             </button>
           </div>
           <div class="px-4 pb-4">
-            <form id="updateProductForm">
+            <form id="updateProductForm" class="hidden">
               <div class="space-y-6">
                 <div class="mb-4 flex items-center justify-start">
                   <label for="image" class="mr-4">Upload Image</label>
@@ -209,6 +206,37 @@
                   <button type="submit" class="mt-4 w-2/4 rounded-full bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-700">
                     Update
                   </button>
+                </div>
+              </div>
+            </form>
+            <form id="orderProductForm" class="hidden">
+              <div class="grid sm:grid-cols-1 md:grid-cols-2">
+                <div>
+                  <img src="" class="orderProduct" alt="Product Image">
+                </div>
+                <div class="flex flex-col">
+                  <div>
+                    <label for="ReadonlyProductName">Product Name</label>
+                    <input type="text" class="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" name="ReadonlyProductName" value="" readonly>
+                  </div>
+                  <div>
+                    <label for="SelectedQuantity">Quantity</label>
+                    <select name="Quantity" id="SelectedQuantity" class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 ">
+                    </select>
+                  </div>
+                  <div>
+                    <label for="price">Price:</label>
+                    <input type="text" name="price" class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 ">
+                  </div>
+                  <div>
+                    <label for="Total">Total:</label>
+                    <input type="text" name="Total" class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 font-bold" readonly>
+                  </div>
+                  <div class="flex justify-end">
+                    <button type="submit" class="mt-4 w-2/4 rounded-full bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-700">
+                      Place Order
+                    </button>
+                  </div>
                 </div>
               </div>
             </form>
@@ -373,13 +401,13 @@
                     class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   >
                   <option value="">Select a Category</option>
-                  <option value="building_materials">Building Materials</option>
-                  <option value="tools">Tools</option>
-                  <option value="plumbing_supplies">Plumbing Supplies</option>
-                  <option value="electrical_supplies">Electrical Supplies</option>
-                  <option value="paint_and_decorating_supplies">Paint and Decorating Supplies</option>
-                  <option value="hardware_and_fasteners">Hardware and Fasteners</option>
-                  <option value="lawn_and_garden_supplies">Lawn and Garden Supplies</option>
+                  <option value="Building Materials">Building Materials</option>
+                  <option value="Tools">Tools</option>
+                  <option value="Plumbing Supplies">Plumbing Supplies</option>
+                  <option value="Electrical Supplies">Electrical Supplies</option>
+                  <option value="Paint and Decorating Supplies">Paint and Decorating Supplies</option>
+                  <option value="Hardware and Fasteners">Hardware and Fasteners</option>
+                  <option value="Lawn and Garden Supplies">Lawn and Garden Supplies</option>
                   </select>
                 </div>
                 <div>

@@ -49,12 +49,18 @@ class product {
     }
   }
 
-  orderProduct(id) {
-    const product = this.productList.find((product) => product.id === id);
-    if (product) {
-      console.log(`Ordering ${product.name}`);
-    } else {
-      console.log("Product not found");
+ async orderProduct(id, orderProductQuantity, orderProductTotalPrice) {
+    try{
+      const product = this.productList.find((product) => product.id === id);
+      if (product) {
+        product.quantity -= orderProductQuantity;
+        this.saveToLocalStorage();
+        return {message: `New Order For Product ${product.name}`, success: true};
+      } else {
+        return {message: "Product Not Found", success: false};
+      }
+    }catch(error){
+      return {message: "Error" + error, success: false};
     }
   }
 
@@ -79,10 +85,9 @@ class toast {
     this.toastInstance = $("#toast");
   }
 
-  showToast(bgcolor, iconColor, message) {
+  showToast(bgcolor, message) {
     this.toastInstance.removeClass("hidden");
-    this.toastInstance.addClass(bgcolor);
-    this.toastInstance.find("#toast-icon").addClass(iconColor);
+    this.toastInstance.find('#toast-content').addClass(bgcolor);
     this.toastInstance.find("#toast-message").text(message);
     setTimeout(() => {
       this.toastInstance.addClass("hidden");
@@ -91,21 +96,35 @@ class toast {
 
   closeToast() {
     this.toastInstance.addClass("hidden");
+    this.toastInstance.find('#toast-content').removeClass('bg-green-100, bg-red-100, border, border-green-400, border-red-400 ')
+    this.toastInstance.find("#toast-message").text('');
   }
 }
 
 class model {
   constructor() {
-    this.modelInstance = $(".modal");
+    this.modalInstance = $(".modal");
   }
 
-  getModalInstance(){
-    this.modelInstance.removeClass('hidden')
-    return this.modelInstance;
+  getUpdateModalInstance(){
+    this.modalInstance.removeClass('hidden');
+    this.modalInstance.find('h3').text('Update Product');
+    this.modalInstance.find('#updateProductForm').removeClass('hidden');
+    return this.modalInstance;
+  }
+  getOrderModalInstance(){
+    this.modalInstance.removeClass('hidden');
+    this.modalInstance.find('h3').text('Order Product');
+    this.modalInstance.find('#orderProductForm').removeClass('hidden');
+    return this.modalInstance;
   }
 
   closeModal() {
-    this.modelInstance.addClass("hidden");
+    this.modalInstance.addClass("hidden");
+    this.modalInstance.find('h3').text('');
+   const modalForms = this.modalInstance.find('#updateProductForm, #orderProductForm');
+   modalForms.addClass('hidden');
+   modalForms.find('input, select').val('')
   }
 }
 
@@ -188,12 +207,10 @@ $("#productList").on('click', '.edit', function() {
  const product_quantity = tableRow.find('td:eq(4)').text().trim();
  const product_price = tableRow.find('td:eq(4)').text().trim();
 
-const modal = modelClass.getModalInstance();
+const modal = modelClass.getUpdateModalInstance();
 
 const modalBody = modal.find('.modal-body');
 const updateform = modalBody.find('#updateProductForm');
-
-console.log(updateform);
 
 updateform.find('.image-preview').attr('src', `${product_imageBase64}`);
 updateform.find('input[name="updated-product-image"]').attr('data-imgBased64', product_imageBase64);
@@ -202,13 +219,12 @@ updateform.find('select[name="updated-category"]').val(product_category);
 updateform.find('input[name="update-quantity"]').val(product_quantity);
 updateform.find('input[name="update-price"]').val(product_price);
 
- $("#updateProductForm").on("submit", async function(e){
+ modal.find("#updateProductForm").on("submit", async function(e){
    e.preventDefault();
  
    const updateFormData = new FormData(this);
    let updateProductImage = updateFormData.get('updated-product-image');
-    
- 
+
    if (updateProductImage && updateProductImage.size > 0) {
        console.log("File detected:", updateProductImage);
 
@@ -236,8 +252,8 @@ updateform.find('input[name="update-price"]').val(product_price);
     modelClass.closeModal();
     getProductsList();
     result.success === true
-    ? toastClass.showToast("bg-green", "text-white", result.message)
-    : toastClass.showToast("bg-red", "text-white", result.message);
+    ? toastClass.showToast("bg-green-100 border border-green-400", result.message)
+    : toastClass.showToast("bg-red-100 border border-red-400", result.message);
 
 } else {
     // Image is a File object, we need to convert it to Base64
@@ -255,8 +271,8 @@ updateform.find('input[name="update-price"]').val(product_price);
         getProductsList();
         modelClass.closeModal();
         result.success === true
-        ? toastClass.showToast("bg-green", "text-white", result.message)
-        : toastClass.showToast("bg-red", "text-white", result.message);
+        ? toastClass.showToast("bg-green-100 border border-green-400", result.message)
+        : toastClass.showToast("bg-red-100 border border-red-400", result.message);
     };
     reader.readAsDataURL(updateProductImage);
 
@@ -265,13 +281,59 @@ updateform.find('input[name="update-price"]').val(product_price);
  })
 })
 
+$('#productList').on('click', '.order', function() {
+  const tableRow = $(this).closest('tr');
+  const product_id = tableRow.data('product-id');
+  const product_imageBase64 = tableRow.find('img').attr('src');
+  const product_name = tableRow.find('td:eq(2)').text().trim();
+  const product_quantity = tableRow.find('td:eq(4)').text().trim();
+  const product_price = tableRow.find('td:eq(4)').text().trim();
+
+  const modal = modelClass.getOrderModalInstance();
+
+  modal.find('img').attr('src', product_imageBase64);
+  modal.find('input[name="ReadonlyProductName"]').val(product_name);
+  modal.find('input[name="price"]').val(product_price)
+  const quantitySelect = modal.find('select[name="Quantity"]').empty();
+
+
+  (() => {
+     quantitySelect.append(`<option>Select Quantity</option>`)
+    for(let i = 1; i <= product_quantity; i++){
+      quantitySelect.append(`<option value="${i}">Quantities: ${i}</option>`)
+    }
+  })(parseInt(product_quantity));
+
+  quantitySelect.on('change', function(){
+    const thisInputValue  = $(this).val();
+    const totalPriceReadonlyInput =  modal.find('input[name="Total"]');
+    const totalPrice = parseInt(thisInputValue) * parseFloat(product_price);
+
+    totalPriceReadonlyInput.val(totalPrice)
+  });
+
+  modal.find('#orderProductForm').on('submit', async function(e){
+    e.preventDefault();
+    const orderFormData = new FormData(this);
+
+    const orderProductQuantity = orderFormData.get('Quantity');
+    const orderProducTotalPrice = orderFormData.get('Total');
+    console.log(product_id, orderProductQuantity, orderProducTotalPrice)
+    const result = await manageProduct.orderProduct(product_id, orderProductQuantity, orderProducTotalPrice)
+    result.success === true
+    ? toastClass.showToast("bg-green-100 border border-green-400",  result.message)
+    : toastClass.showToast("bg-red-100 border border-red-400",  result.message);
+  getProductsList();
+  })
+})
+
 
 $("#productList").on("click", ".delete", async function () {
   const productId = $(this).closest("tr").data("product-id");
   const result = await manageProduct.deleteProduct(productId);
   result.success === true
-    ? toastClass.showToast("bg-green", "text-green-500", result.message)
-    : toastClass.showToast("bg-red", "text-red", result.message);
+    ? toastClass.showToast("bg-green-100 border border-green-400", result.message)
+    : toastClass.showToast("bg-red-100 border border-red-400", result.message);
   getProductsList();
 });
 
@@ -295,9 +357,16 @@ $("[data-model]").on("click", function () {
   modelClass.closeModal();
 });
 
+
+/**
+ * Calculates the total quantity and price of products and updates the corresponding HTML elements.
+ *
+ * @return {void}
+ */
 const calculateTotalQuantityAndPrice =  async () => {
  const result = await manageProduct.calculateTotalQuantityAndPrice();
- 
+
+ console.log(result);
  $('#totalQuantity').text(result?.totalQuantity);
  $('#totalPrice').text(`₱ ${result?.totalPrice}`)
 
