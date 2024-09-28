@@ -787,3 +787,4 @@ $("[data-model]").on("click", function () {
 
 
 calculateTotalQuantityAndPrice();
+
