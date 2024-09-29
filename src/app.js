@@ -1,17 +1,20 @@
+if (import.meta.hot) {
+  import.meta.hot.accept();
+}
+
 /**
  * Represents a Product in the inventory.
  * @class
  */
 class product {
-  
   /**
- * Initializes a new instance of the class.
- * @constructor
- * @this {product}
- * @description
- * The constructor retrieves the product list and sold product list from 
- * local storage. If the lists are not available, they default to empty arrays.
- */
+   * Initializes a new instance of the class.
+   * @constructor
+   * @this {product}
+   * @description
+   * The constructor retrieves the product list and sold product list from
+   * local storage. If the lists are not available, they default to empty arrays.
+   */
   constructor() {
     this.productList = JSON.parse(localStorage.getItem("productList")) || [];
     this.soldProductList =
@@ -19,52 +22,52 @@ class product {
   }
 
   /**
- * Saves the current product list to local storage.
- * @function
- * @this {product} 
- * @returns {void}
- * @description 
- * This function converts the `productList` array to a JSON string 
- * and stores it in local storage under the key "productList".
- */
+   * Saves the current product list to local storage.
+   * @function
+   * @this {product}
+   * @returns {void}
+   * @description
+   * This function converts the `productList` array to a JSON string
+   * and stores it in local storage under the key "productList".
+   */
   saveToLocalStorage() {
     localStorage.setItem("productList", JSON.stringify(this.productList));
   }
 
-
   /**
- * Saves the current sold product list to local storage.
- * @function
- * @this {product}  // Replace with the actual name of your class
- * @returns {void}
- * @description 
- * This function converts the `soldProductList` array to a JSON string 
- * and stores it in local storage under the key "soldProductList".
- */
+   * Saves the current sold product list to local storage.
+   * @function
+   * @this {product}  // Replace with the actual name of your class
+   * @returns {void}
+   * @description
+   * This function converts the `soldProductList` array to a JSON string
+   * and stores it in local storage under the key "soldProductList".
+   */
   saveSoldProduct() {
-    localStorage.setItem("soldProductList", JSON.stringify(this.soldProductList));
+    localStorage.setItem(
+      "soldProductList",
+      JSON.stringify(this.soldProductList),
+    );
   }
 
-
-
   /**
- * Adds a new product to the product list and saves it to local storage.
- * @async
- * @function
- * @this {product}
- * @param {Object} product - The product object to be added.
- * @param {number} product.id - The unique identifier for the product (will be assigned automatically).
- * @param {string} product.name - The name of the product.
- * @param {string} product.category - The category of the product.
- * @param {number} product.quantity - The quantity of the product.
- * @param {number} product.price - The price of the product.
- * @returns {Promise<Object>} A promise that resolves to an object containing a success message and status.
- * @throws {Error} Throws an error if there is an issue adding the product.
- * @description 
- * This method assigns a unique ID to the new product, adds it to the `productList`, 
- * and saves the updated list to local storage. It returns a success message if the 
- * operation is successful, or an error message if an exception occurs.
- */
+   * Adds a new product to the product list and saves it to local storage.
+   * @async
+   * @function
+   * @this {product}
+   * @param {Object} product - The product object to be added.
+   * @param {number} product.id - The unique identifier for the product (will be assigned automatically).
+   * @param {string} product.name - The name of the product.
+   * @param {string} product.category - The category of the product.
+   * @param {number} product.quantity - The quantity of the product.
+   * @param {number} product.price - The price of the product.
+   * @returns {Promise<Object>} A promise that resolves to an object containing a success message and status.
+   * @throws {Error} Throws an error if there is an issue adding the product.
+   * @description
+   * This method assigns a unique ID to the new product, adds it to the `productList`,
+   * and saves the updated list to local storage. It returns a success message if the
+   * operation is successful, or an error message if an exception occurs.
+   */
   async addProduct(product) {
     try {
       product.id = this.productList.length + 1;
@@ -76,26 +79,25 @@ class product {
     }
   }
 
-
   /**
- * Updates an existing product in the product list and saves the changes to local storage.
- * @async
- * @function
- * @this {product} 
- * @param {number} id - The unique identifier of the product to be updated.
- * @param {Object} updatedProduct - An object containing the updated product information.
- * @param {string} [updatedProduct.name] - The updated name of the product.
- * @param {string} [updatedProduct.category] - The updated category of the product.
- * @param {number} [updatedProduct.quantity] - The updated quantity of the product.
- * @param {number} [updatedProduct.price] - The updated price of the product.
- * @returns {Promise<Object>} A promise that resolves to an object containing a success message and status.
- * @throws {Error} Throws an error if the product is not found or if there is an issue updating the product.
- * @description 
- * This method searches for a product by its unique ID, updates its information with 
- * the provided values, and saves the updated product list to local storage. It 
- * returns a success message if the update is successful, or an error message if 
- * the product is not found or another issue occurs.
- */
+   * Updates an existing product in the product list and saves the changes to local storage.
+   * @async
+   * @function
+   * @this {product}
+   * @param {number} id - The unique identifier of the product to be updated.
+   * @param {Object} updatedProduct - An object containing the updated product information.
+   * @param {string} [updatedProduct.name] - The updated name of the product.
+   * @param {string} [updatedProduct.category] - The updated category of the product.
+   * @param {number} [updatedProduct.quantity] - The updated quantity of the product.
+   * @param {number} [updatedProduct.price] - The updated price of the product.
+   * @returns {Promise<Object>} A promise that resolves to an object containing a success message and status.
+   * @throws {Error} Throws an error if the product is not found or if there is an issue updating the product.
+   * @description
+   * This method searches for a product by its unique ID, updates its information with
+   * the provided values, and saves the updated product list to local storage. It
+   * returns a success message if the update is successful, or an error message if
+   * the product is not found or another issue occurs.
+   */
   async updateProduct(id, updatedProduct) {
     try {
       const index = this.productList.findIndex((product) => product.id === id);
@@ -115,16 +117,16 @@ class product {
   }
 
   /**
- * Deletes a product from the product list by its unique identifier and saves the changes to local storage.
- * @async
- * @function
- * @this {product}
- * @param {number} id - The unique identifier of the product to be deleted.
- * @returns {Promise<Object>} A promise that resolves to an object containing a success message and status.
- * @throws {Error} Throws an error if there is an issue deleting the product.
- * @description 
- * This method removes a product from the product list based on the provided ID and updates the local storage to reflect the changes. It returns a success message if the deletion is successful.
- */
+   * Deletes a product from the product list by its unique identifier and saves the changes to local storage.
+   * @async
+   * @function
+   * @this {product}
+   * @param {number} id - The unique identifier of the product to be deleted.
+   * @returns {Promise<Object>} A promise that resolves to an object containing a success message and status.
+   * @throws {Error} Throws an error if there is an issue deleting the product.
+   * @description
+   * This method removes a product from the product list based on the provided ID and updates the local storage to reflect the changes. It returns a success message if the deletion is successful.
+   */
   async deleteProduct(id) {
     try {
       this.productList = this.productList.filter(
@@ -138,33 +140,35 @@ class product {
   }
 
   /**
- * Processes an order for a specific product by updating its quantity in the product list 
- * and tracking sold products. Saves the updated data to local storage.
- * @async
- * @function
- * @this {product} // Replace with the actual name of your class
- * @param {number} id - The unique identifier of the product being ordered.
- * @param {number} orderProductQuantity - The quantity of the product to be ordered.
- * @param {number} orderProductTotalPrice - The total price for the ordered quantity of the product.
- * @returns {Promise<Object>} A promise that resolves to an object containing a success message and status.
- * @throws {Error} Throws an error if there is an issue processing the order.
- * @description 
- * This method adjusts the quantity of the specified product in the product list 
- * and records the order in the sold product list. If the product already exists in the 
- * sold product list, it updates the quantity and total price. It returns a success message 
- * upon successful order processing or an error message if the product is not found.
- */
+   * Processes an order for a specific product by updating its quantity in the product list
+   * and tracking sold products. Saves the updated data to local storage.
+   * @async
+   * @function
+   * @this {product} // Replace with the actual name of your class
+   * @param {number} id - The unique identifier of the product being ordered.
+   * @param {number} orderProductQuantity - The quantity of the product to be ordered.
+   * @param {number} orderProductTotalPrice - The total price for the ordered quantity of the product.
+   * @returns {Promise<Object>} A promise that resolves to an object containing a success message and status.
+   * @throws {Error} Throws an error if there is an issue processing the order.
+   * @description
+   * This method adjusts the quantity of the specified product in the product list
+   * and records the order in the sold product list. If the product already exists in the
+   * sold product list, it updates the quantity and total price. It returns a success message
+   * upon successful order processing or an error message if the product is not found.
+   */
   async orderProduct(id, orderProductQuantity, orderProductTotalPrice) {
-    console.log('this is called')
+    console.log("this is called");
     try {
-      const parsedOrderQuantity = parseInt(orderProductQuantity)
-      const parsedTotalPrice = parseFloat(orderProductTotalPrice)
+      const parsedOrderQuantity = parseInt(orderProductQuantity);
+      const parsedTotalPrice = parseFloat(orderProductTotalPrice);
       const product = this.productList.find((product) => product.id === id);
 
       if (product) {
         product.quantity -= parsedOrderQuantity;
 
-        const existingSoldProduct = this.soldProductList.find((soldProduct) => soldProduct?.id === id);
+        const existingSoldProduct = this.soldProductList.find(
+          (soldProduct) => soldProduct?.id === id,
+        );
 
         console.log(existingSoldProduct);
         if (existingSoldProduct) {
@@ -177,7 +181,7 @@ class product {
             quantity: parsedOrderQuantity,
             price: parsedTotalPrice,
           };
-         this.soldProductList.push(soldProduct);
+          this.soldProductList.push(soldProduct);
         }
 
         this.saveSoldProduct();
@@ -194,19 +198,18 @@ class product {
     }
   }
 
-
   /**
- * Calculates the total quantity and total price of all products in the product list.
- * @async
- * @function
- * @this {product}
- * @returns {Promise<Object>} A promise that resolves to an object containing the total quantity and total price.
- * @throws {Error} Throws an error if there is an issue during the calculation process.
- * @description 
- * This method iterates through the `productList` and computes the total quantity and 
- * total price by summing up the quantity and the product of quantity and price for each product. 
- * It returns an object containing the total quantity and total price.
- */
+   * Calculates the total quantity and total price of all products in the product list.
+   * @async
+   * @function
+   * @this {product}
+   * @returns {Promise<Object>} A promise that resolves to an object containing the total quantity and total price.
+   * @throws {Error} Throws an error if there is an issue during the calculation process.
+   * @description
+   * This method iterates through the `productList` and computes the total quantity and
+   * total price by summing up the quantity and the product of quantity and price for each product.
+   * It returns an object containing the total quantity and total price.
+   */
   async calculateTotalQuantityAndPrice() {
     try {
       const totalQuantity = this.productList.reduce(
@@ -226,12 +229,46 @@ class product {
   }
 
   /**
- * Retrieves the list of all products.
- * @returns {Array<Object>} An array of product objects from the product list.
- * @description 
- * This method returns the current list of products stored in the productList property.
- * Each product object in the array contains details such as id, name, category, quantity, and price.
- */
+   * Retrieves details about the sold products including names, total quantity, and total price.
+   *
+   * This method processes the `soldProductList` array, extracting the names of sold products,
+   * calculating the total quantity sold, and the total revenue generated from sold products.
+   *
+   * @returns {Object} An object containing:
+   * - `soldProductNames` {string[]} - Array of names of the sold products.
+   * - `totalQuantitySold` {number} - The total quantity of products sold.
+   * - `totalPriceSold` {number} - The total price from the sold products.
+   *
+   * @example
+   * const { soldProductNames, totalQuantitySold, totalPriceSold } = product.getSoldProducts();
+   * console.log(soldProductNames); // ['Product A', 'Product B']
+   * console.log(totalQuantitySold); // 10
+   * console.log(totalPriceSold); // 250.75
+   */
+  getSoldProducts() {
+    const soldProductNames = this.soldProductList.map(
+      (soldProduct) => soldProduct.name,
+    );
+    const totalQuantitySold = this.soldProductList.reduce(
+      (acc, soldProduct) => acc + parseFloat(soldProduct.quantity),
+      0,
+    );
+    const totalPriceSold = this.soldProductList.reduce(
+      (acc, soldProduct) =>
+        acc + parseFloat(soldProduct.quantity) * parseFloat(soldProduct.price),
+      0,
+    );
+
+    return { soldProductNames, totalQuantitySold, totalPriceSold };
+  }
+
+  /**
+   * Retrieves the list of all products.
+   * @returns {Array<Object>} An array of product objects from the product list.
+   * @description
+   * This method returns the current list of products stored in the productList property.
+   * Each product object in the array contains details such as id, name, category, quantity, and price.
+   */
   getAllProducts() {
     return this.productList;
   }
@@ -241,8 +278,7 @@ class product {
  * A class to handle toast notifications in the user interface.
  */
 class toast {
-
-   /**
+  /**
    * Initializes a new instance of the toast class.
    * @constructor
    */
@@ -267,10 +303,9 @@ class toast {
     }, 2000);
   }
 
-
   /**
    * Hides the toast notification immediately.
-   * @description 
+   * @description
    * This method adds the hidden class to the toast element,
    * removes any background color and border classes, and clears the toast message.
    */
@@ -285,14 +320,10 @@ class toast {
   }
 }
 
-
-
 /**
  * A class to manage modal instances for product operations.
  */
 class model {
-
-
   /**
    * Initializes a new instance of the modal class.
    * @constructor
@@ -300,7 +331,6 @@ class model {
   constructor() {
     this.modalInstance = $(".modal");
   }
-
 
   /**
    * Displays the update modal for a product.
@@ -316,12 +346,11 @@ class model {
     return this.modalInstance;
   }
 
-
   /**
    * Displays the order modal for a product.
    * @returns {jQuery} The jQuery object representing the modal instance.
-   * @description 
-   * This method removes the hidden class from the modal, sets the header text to 
+   * @description
+   * This method removes the hidden class from the modal, sets the header text to
    * "Order Product", displays the order product form, and returns the modal instance.
    */
   getOrderModalInstance() {
@@ -331,12 +360,11 @@ class model {
     return this.modalInstance;
   }
 
-
   /**
    * Closes the modal and resets its content.
-   * @description 
-   * This method adds the hidden class to the modal, clears the header text, 
-   * hides the update and order product forms, unbinds any submit events, and resets 
+   * @description
+   * This method adds the hidden class to the modal, clears the header text,
+   * hides the update and order product forms, unbinds any submit events, and resets
    * all input and select elements within the forms.
    */
   closeModal() {
@@ -348,14 +376,12 @@ class model {
     modalForms.off("submit");
     modalForms.addClass("hidden");
     modalForms.find("input, select").val("");
-
   }
 }
 
 const manageProduct = new product();
 const toastClass = new toast();
 const modelClass = new model();
-
 
 /**
  * Calculates the total quantity and price of all products and updates the corresponding HTML elements.
@@ -368,16 +394,15 @@ const calculateTotalQuantityAndPrice = async () => {
   $("#totalPrice").text(`₱ ${result?.totalPrice}`);
 };
 
-
 /**
  * Retrieves the list of all products from the `manageProduct` module and dynamically generates a table of products.
  * The product list is rendered inside an HTML table with the ID `#productList`, replacing any existing content.
- * 
- * Each product row contains the product's ID, image, name, category, quantity, and price, as well as buttons for 
+ *
+ * Each product row contains the product's ID, image, name, category, quantity, and price, as well as buttons for
  * ordering, editing, and deleting the product.
- * 
+ *
  * @function getProductsList
- * 
+ *
  * Function Steps:
  * 1. Calls `manageProduct.getAllProducts()` to retrieve all product data.
  * 2. Clears the current contents of the table body with ID `#productList`.
@@ -404,7 +429,7 @@ const getProductsList = () => {
     row.append($('<td class="border-y px-4 py-2">').text(product.id));
     row.append(
       $('<td class="border-y px-4 py-2">').html(
-        `<img src="${product.image}" class="w-24 h-24 object-cover rounded-full mx-auto" alt="Product Image">`,
+        `<img src="${product.image}" class="object-cover rounded-full mx-auto" style="width: 90px; height: 90px;" alt="Product Image">`,
       ),
     );
     row.append(
@@ -430,7 +455,6 @@ const getProductsList = () => {
 };
 
 getProductsList();
-
 
 /**
  * Event listener for the submit event on the #addProductForm element.
@@ -469,12 +493,17 @@ $("#addProductForm").on("submit", function (e) {
     getProductsList();
     calculateTotalQuantityAndPrice();
     result.success === true
-      ? toastClass.showToast("bg-green-100 border border-green-400", result.message)
-      : toastClass.showToast("bg-red-100 border border-red-400", result.message);
+      ? toastClass.showToast(
+          "bg-green-100 border border-green-400",
+          result.message,
+        )
+      : toastClass.showToast(
+          "bg-red-100 border border-red-400",
+          result.message,
+        );
   };
   reader.readAsDataURL(productImage);
 });
-
 
 /**
  * Event listener for editing a product when the "edit" button is clicked in the product list table.
@@ -484,7 +513,7 @@ $("#addProductForm").on("submit", function (e) {
  * @event Click on the edit button in the product list.
  *
  * @param {jQuery.Event} event - The jQuery event object.
- * 
+ *
  * Function Steps:
  * 1. Extract product details (ID, image, name, category, quantity, price) from the clicked row.
  * 2. Populate the update modal with the product details.
@@ -602,8 +631,6 @@ $("#productList").on("click", ".edit", function () {
   });
 });
 
-
-
 /**
  * Event listener for placing an order when the "order" button is clicked in the product list table.
  * This function extracts product details from the table row, populates the order modal with the product data,
@@ -613,7 +640,7 @@ $("#productList").on("click", ".edit", function () {
  * @event Click on the order button in the product list.
  *
  * @param {jQuery.Event} event - The jQuery event object.
- * 
+ *
  * Function Steps:
  * 1. Extract product details (ID, image, name, quantity, price) from the clicked row.
  * 2. Populate the order modal with product details including setting up a quantity selector.
@@ -681,17 +708,16 @@ $("#productList").on("click", ".order", function () {
   });
 });
 
-
 /**
  * Event listener for deleting a product when the "delete" button is clicked in the product list table.
  * This function retrieves the product ID from the clicked table row, calls the deleteProduct method
- * to remove the product, and handles the result by displaying a success or error message. 
+ * to remove the product, and handles the result by displaying a success or error message.
  * It also refreshes the product list after deletion.
  *
  * @event Click on the delete button in the product list.
  *
  * @param {jQuery.Event} event - The jQuery event object.
- * 
+ *
  * Function Steps:
  * 1. Extract the product ID from the clicked table row.
  * 2. Call the asynchronous deleteProduct function to remove the product from the database.
@@ -712,9 +738,6 @@ $("#productList").on("click", ".delete", async function () {
   getProductsList();
 });
 
-
-
-
 /**
  * Event listener for handling image input changes in the update or add product forms.
  * When the user selects a new image, this function reads the file, converts it to a Base64 data URL,
@@ -727,7 +750,7 @@ $("#productList").on("click", ".delete", async function () {
  * Function Steps:
  * 1. Capture the selected file from the input field.
  * 2. Use FileReader to asynchronously read the file and convert it to a Base64 string.
- * 3. Once the file is successfully read, update the `src` attribute of the image preview element 
+ * 3. Once the file is successfully read, update the `src` attribute of the image preview element
  *    inside the form where the input field is located.
  *
  * @function
@@ -750,7 +773,6 @@ $("#updateProductForm, #addProductForm").on(
   },
 );
 
-
 /**
  * Event listener for the "Unselect Image" button.
  * When clicked, this function clears the selected image input and resets the image preview.
@@ -759,7 +781,7 @@ $("#updateProductForm, #addProductForm").on(
  *
  * Function Steps:
  * 1. Clears the value of the image input field (`.image-input`) to remove the selected file.
- * 2. Resets the `src` attribute of the image preview element (`.image-preview`) to an empty string, 
+ * 2. Resets the `src` attribute of the image preview element (`.image-preview`) to an empty string,
  *    effectively removing the displayed image preview.
  *
  * @function
@@ -768,7 +790,6 @@ $(".unselect-image").on("click", () => {
   $(".image-input").val("");
   $(".image-preview").attr("src", "");
 });
-
 
 /**
  * Event listener for elements with the attribute `[data-model]`.
@@ -785,11 +806,28 @@ $("[data-model]").on("click", function () {
   modelClass.closeModal();
 });
 
-
 calculateTotalQuantityAndPrice();
 
- $('.number-only').on('input', function(){
-  const input = $(this);
-  const value = input.val().replace(/[^0-9.]/g, '');
-  input.val(value);
- });
+$(".number-only").on("input", function () {
+  const input = $(this).val();
+  const filteredValue = input.replace(/[^0-9.]/g, "");
+  $(this).val(filteredValue);
+});
+
+const getSoldProducts = () => {
+  const results = manageProduct.getSoldProducts();
+
+  const soldProductContainer = $("#recentOrderList");
+  soldProductContainer.empty();
+
+  results.soldProductNames.forEach((product) => {
+    const productList = $(
+      `<li class="text-sm font-medium text-gray-600">>${product}</li>`,
+    );
+    soldProductContainer.append(productList);
+  });
+
+  $("#totalSoldItems").text(results.totalQuantitySold ?? 0);
+  $("#totalRevenue").text(results.totalPriceSold ?? 0);
+};
+getSoldProducts();

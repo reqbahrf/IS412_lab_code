@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="stylesheet" href="../src/output.css" />
+    <link rel="stylesheet" href="../src/app.css" />
   </head>
   <body class="bg-gray-100">
     <!-- Header  -->
@@ -195,11 +195,11 @@
                 <div class="flex items-center w-full">
                   <div class="w-3/6">
                     <label for="update-quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
-                    <input type="number" name="update-quantity" id="quantity" class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" />
+                    <input type="text" name="update-quantity" id="quantity" class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm number-only" />
                   </div>
                   <div class="w-3/6">
                     <label for="updated-price" class="block text-sm font-medium text-gray-700">Price</label>
-                    <input type="number" name="update-price" id="price" class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" />
+                    <input type="text" name="update-price" id="price" class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm number-only" />
                   </div>
                 </div>
                 <div class="flex justify-end">
@@ -226,7 +226,7 @@
                   </div>
                   <div>
                     <label for="price">Price:</label>
-                    <input type="text" name="price" class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 ">
+                    <input type="text" name="price" class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500" readonly>
                   </div>
                   <div>
                     <label for="Total">Total:</label>
@@ -279,77 +279,7 @@
                 </tr>
               </thead>
               <tbody id="productList">
-                <tr class="border">
-                  <td class="border-y px-4 py-2">1</td>
-                  <td class="border-y px-4 py-2"><img src="../assets_img/160-1607108_hardware-tools-png-ff-group-transparent-png.png" class="w-24 h-24 object-cover rounded-full mx-auto" alt="Product Image"></td>
-                  <td class="border-y px-4 py-2 text-center">Product 1</td>
-                  <td class="border-y px-4 py-2 text-center">Category 1</td>
-                  <td class="border-y px-4 py-2 text-center">10</td>
-                  <td class="border-y px-4 py-2 text-center">₱100.00</td>
-                  <td class="text-center">
-                    <button class="bg-green-500 px-2 py-2 text-white order">
-                      Order
-                    </button>
-                    <button class="bg-blue-500 px-2 py-2 text-white Edit">Edit</button>
-                    <button class="bg-red-500 px-2 py-2 text-white delete">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-                <tr class="border">
-                  <td class="border-y px-4 py-2">2</td>
-                  <td class="border-y px-4 py-2">
-                    <img src="../assets_img/61oUDrgf7YL._AC_UF894,1000_QL80_.jpg" class="w-24 h-24 object-cover rounded-full mx-auto" alt="Product Image"></td>
-                  <td class="border-y px-4 py-2 text-center">Product 2</td>
-                  <td class="border-y px-4 py-2 text-center">Category 2</td>
-                  <td class="border-y px-4 py-2 text-center">5</td>
-                  <td class="border-y px-4 py-2 text-center">₱250.00</td>
-                  <td class="text-center">
-                    <button class="bg-green-500 px-2 py-2 text-white">
-                      Order
-                    </button>
-                    <button class="bg-blue-500 px-2 py-2 text-white">Edit</button>
-                    <button class="bg-red-500 px-2 py-2 text-white">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-                <tr class="border">
-                  <td class="border-y px-4 py-2">3</td>
-                  <td class="border-y px-4 py-2">
-                    <img src="../assets_img/professional-hand-tools-and-equipaments.png" class="w-24 h-24 object-cover rounded-full mx-auto" alt="Product Image"></td>
-                  <td class="border-y px-4 py-2 text-center">Product 3</td>
-                  <td class="border-y px-4 py-2 text-center">Category 3</td>
-                  <td class="border-y px-4 py-2 text-center">5</td>
-                  <td class="border-y px-4 py-2 text-center">₱250.00</td>
-                  <td class="text-center">
-                    <button class="bg-green-500 px-2 py-2 text-white">
-                      Order
-                    </button>
-                    <button class="bg-blue-500 px-2 py-2 text-white">Edit</button>
-                    <button class="bg-red-500 px-2 py-2 text-white">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-                <tr class="border">
-                  <td class="border-y px-4 py-2">4</td>
-                  <td class="border-y px-4 py-2">
-                    <img src="../assets_img/powerdrills.jpg" class="w-24 h-24 rounded-full mx-auto object-cover" alt="Product Image"></td>
-                  <td class="border-y px-4 py-2 text-center">Product 4</td>
-                  <td class="border-y px-4 py-2 text-center">Category 4</td>
-                  <td class="border-y px-4 py-2 text-center">5</td>
-                  <td class="border-y px-4 py-2 text-center">₱250.00</td>
-                  <td class="text-center">
-                    <button class="bg-green-500 px-2 py-2 text-white">
-                      Order
-                    </button>
-                    <button class="bg-blue-500 px-2 py-2 text-white">Edit</button>
-                    <button class="bg-red-500 px-2 py-2 text-white">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
+               
               </tbody>
               <tfoot class="sticky bottom-0 bg-white">
                 <tr>
@@ -372,8 +302,8 @@
                 <input type="file" name="product-image" accept="image/jpeg, image/png"  class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 image-input">
                 <button type="button" class="p-2 rounded-full bg-red-500 text-white hover:bg-red-700 unselect-image">&#x2715;</button>
               </div>
-              <div class="mb-4">
-                <img src="" alt="Image Preview" class="w-full h-full object-cover object-center image-preview">
+              <div class="mb-4 w-40 h-40">
+                <img src="" alt="Image Preview" class="mx-auto max-w-40 max-h-40 object-cover object-center image-preview">
               </div>
               <div class="grid grid-cols-2 gap-4">
                 <div>
@@ -417,7 +347,7 @@
                     >Quantity</label
                   >
                   <input
-                    type="number"
+                    type="text"
                     name="quantity"
                     id="quantity"
                     class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm number-only"
@@ -430,7 +360,7 @@
                     >Price</label
                   >
                   <input
-                    type="number"
+                    type="text"
                     name="price"
                     id="price"
                     class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm number-only"
@@ -447,6 +377,28 @@
               </div>
             </form>
           </div>
+        </div>
+        <div class="rounded-lg bg-white p-4 shadow-lg min-h-40">
+          <span class="text-xl font-bold">Recent Order:</span>
+          <div class="overflow-y-auto" >
+            <ul id="recentOrderList">
+              
+            </ul>
+          </div>
+        </div>
+        <div class="rounded-lg bg-white p-4 shadow-lg min-h-40 col-span-2">
+          <span class="text-xl font-bold">Total Sold and Revenue</span>
+          <div class="flex justify-center mt-4 space-x-20">
+            <div>
+              <span class="text-lg font-bold">Total Sold Items:</span>
+              <span class="text-3xl font-bold" id="totalSoldItems"></span>
+            </div>
+            <div>
+              <span class="text-lg font-bold">Total Revenue:</span>
+              <span class="text-3xl font-bold" id="totalRevenue"></span>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
