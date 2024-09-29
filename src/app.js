@@ -1,6 +1,9 @@
+
 if (import.meta.hot) {
   import.meta.hot.accept();
 }
+
+import '/src/app.css';
 
 /**
  * Represents a Product in the inventory.
@@ -300,6 +303,11 @@ class toast {
     this.toastInstance.find("#toast-message").text(message);
     setTimeout(() => {
       this.toastInstance.addClass("hidden");
+      this.toastInstance
+      .find("#toast-content")
+      .removeClass(
+        "bg-green-100 bg-red-100 border border-green-400 border-red-400",
+      );
     }, 2000);
   }
 
@@ -314,7 +322,7 @@ class toast {
     this.toastInstance
       .find("#toast-content")
       .removeClass(
-        "bg-green-100, bg-red-100, border, border-green-400, border-red-400 ",
+        "bg-green-100 bg-red-100 border border-green-400 border-red-400",
       );
     this.toastInstance.find("#toast-message").text("");
   }
@@ -394,6 +402,7 @@ const calculateTotalQuantityAndPrice = async () => {
   $("#totalPrice").text(`₱ ${result?.totalPrice}`);
 };
 
+calculateTotalQuantityAndPrice();
 /**
  * Retrieves the list of all products from the `manageProduct` module and dynamically generates a table of products.
  * The product list is rendered inside an HTML table with the ID `#productList`, replacing any existing content.
@@ -446,14 +455,31 @@ const getProductsList = () => {
     );
     row.append(
       $('<td class="text-center">')
-        .html(`<button class="bg-green-500 px-2 py-2 text-white order">Order</button>
-    <button class="bg-blue-500 px-2 py-2 text-white edit">Edit</button>
-    <button class="bg-red-500 px-2 py-2 text-white delete">Delete</button>`),
+        .html(`<button class="bg-green-500 rounded-lg ring-1 ring-teal-800 px-2 py-2 font-bold text-white order">Order</button>
+    <button class="bg-blue-500 rounded-lg ring-1 ring-teal-800 px-2 py-2 font-bold text-white edit">Edit</button>
+    <button class="bg-red-500 rounded-lg ring-1 ring-teal-800 px-2 py-2 font-bold text-white delete">Delete</button>`),
     );
     tablebody.append(row);
   });
 };
 
+const getSoldProducts = () => {
+  const results = manageProduct.getSoldProducts();
+
+  const soldProductContainer = $("#recentOrderList");
+  soldProductContainer.empty();
+
+  results.soldProductNames.forEach((product) => {
+    const productList = $(
+      `<li class="ms-2">${product}</li>`,
+    );
+    soldProductContainer.append(productList);
+  });
+
+  $("#totalSoldItems").text(results.totalQuantitySold ?? 0);
+  $("#totalRevenue").text(results.totalPriceSold ?? 0);
+};
+getSoldProducts();
 getProductsList();
 
 /**
@@ -491,6 +517,7 @@ $("#addProductForm").on("submit", function (e) {
     };
     const result = await manageProduct.addProduct(newProduct);
     getProductsList();
+    getSoldProducts();
     calculateTotalQuantityAndPrice();
     result.success === true
       ? toastClass.showToast(
@@ -534,7 +561,7 @@ $("#productList").on("click", ".edit", function () {
   const product_name = tableRow.find("td:eq(2)").text().trim();
   const product_category = tableRow.find("td:eq(3)").text().trim();
   const product_quantity = tableRow.find("td:eq(4)").text().trim();
-  const product_price = tableRow.find("td:eq(4)").text().trim();
+  const product_price = tableRow.find("td:eq(5)").text().trim();
 
   const modal = modelClass.getUpdateModalInstance();
 
@@ -587,6 +614,7 @@ $("#productList").on("click", ".edit", function () {
         updatedProduct,
       );
       modelClass.closeModal();
+      getSoldProducts();
       getProductsList();
       result.success === true
         ? toastClass.showToast(
@@ -614,6 +642,7 @@ $("#productList").on("click", ".edit", function () {
           updatedProduct,
         );
         getProductsList();
+        getSoldProducts();
         calculateTotalQuantityAndPrice();
         modelClass.closeModal();
         result.success === true
@@ -658,7 +687,7 @@ $("#productList").on("click", ".order", function () {
   const product_imageBase64 = tableRow.find("img").attr("src");
   const product_name = tableRow.find("td:eq(2)").text().trim();
   const product_quantity = tableRow.find("td:eq(4)").text().trim();
-  const product_price = tableRow.find("td:eq(4)").text().trim();
+  const product_price = tableRow.find("td:eq(5)").text().trim();
 
   const modal = modelClass.getOrderModalInstance();
 
@@ -694,6 +723,7 @@ $("#productList").on("click", ".order", function () {
       orderProductQuantity,
       orderProducTotalPrice,
     );
+    modelClass.closeModal();
     console.log(result);
     result.success === true
       ? toastClass.showToast(
@@ -705,6 +735,7 @@ $("#productList").on("click", ".order", function () {
           result.message,
         );
     getProductsList();
+    getSoldProducts();
   });
 });
 
@@ -736,6 +767,7 @@ $("#productList").on("click", ".delete", async function () {
       )
     : toastClass.showToast("bg-red-100 border border-red-400", result.message);
   getProductsList();
+  calculateTotalQuantityAndPrice();
 });
 
 /**
@@ -806,28 +838,10 @@ $("[data-model]").on("click", function () {
   modelClass.closeModal();
 });
 
-calculateTotalQuantityAndPrice();
-
 $(".number-only").on("input", function () {
   const input = $(this).val();
   const filteredValue = input.replace(/[^0-9.]/g, "");
   $(this).val(filteredValue);
 });
 
-const getSoldProducts = () => {
-  const results = manageProduct.getSoldProducts();
 
-  const soldProductContainer = $("#recentOrderList");
-  soldProductContainer.empty();
-
-  results.soldProductNames.forEach((product) => {
-    const productList = $(
-      `<li class="text-sm font-medium text-gray-600">>${product}</li>`,
-    );
-    soldProductContainer.append(productList);
-  });
-
-  $("#totalSoldItems").text(results.totalQuantitySold ?? 0);
-  $("#totalRevenue").text(results.totalPriceSold ?? 0);
-};
-getSoldProducts();

@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-import tailwindcss from 'tailwindcss'
 
 export default defineConfig({
   base: './',
@@ -19,5 +18,5 @@ export default defineConfig({
       overlay: true
     }
   },
-  plugins: [tailwindcss()],
+  plugins: [],
 });
