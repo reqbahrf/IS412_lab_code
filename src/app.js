@@ -102,7 +102,7 @@ class product {
    */
   async updateProduct(id, updatedProduct) {
     try {
-      const index = this.productList.findIndex((product) => product === id);
+      const index = this.productList.findIndex((product) => product.id === id);
       if (index !== -1) {
         this.productList[index] = {
           ...this.productList[index],
@@ -114,7 +114,7 @@ class product {
         throw new Error("Product not found");
       }
     } catch (error) {
-      return { message: "Error" + error, success: false };
+      return { message: error, success: false };
     }
   }
 
@@ -582,7 +582,6 @@ $("#productList").on("click", ".edit", function () {
     const updateProductPrice = updateFormData.get("update-price");
 
     if (updateProductImage && updateProductImage.size > 0) {
-      console.log("File detected:", updateProductImage);
 
       // Image is a File object, we need to convert it to Base64
       const reader = new FileReader();
@@ -618,7 +617,6 @@ $("#productList").on("click", ".edit", function () {
       updateProductImage = $('input[name="updated-product-image"]').attr(
         "data-imgBased64",
       );
-      console.log("Using base64 from data attribute:", updateProductImage);
 
       // Image is already in Base64, no need to read again
       const updatedProduct = {
