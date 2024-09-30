@@ -1,9 +1,8 @@
-
 if (import.meta.hot) {
   import.meta.hot.accept();
 }
 
-import '/src/app.css';
+import "/src/app.css";
 
 /**
  * Represents a Product in the inventory.
@@ -298,16 +297,16 @@ class toast {
    * and message, and sets a timeout to hide the toast after 2 seconds.
    */
   showToast(bgcolor, message) {
-    this.toastInstance.removeClass("hidden");
     this.toastInstance.find("#toast-content").addClass(bgcolor);
     this.toastInstance.find("#toast-message").text(message);
+    this.toastInstance.removeClass("hidden");
     setTimeout(() => {
       this.toastInstance.addClass("hidden");
       this.toastInstance
-      .find("#toast-content")
-      .removeClass(
-        "bg-green-100 bg-red-100 border border-green-400 border-red-400",
-      );
+        .find("#toast-content")
+        .removeClass(
+          "bg-green-100 bg-red-100 border border-green-400 border-red-400",
+        );
     }, 2000);
   }
 
@@ -470,9 +469,7 @@ const getSoldProducts = () => {
   soldProductContainer.empty();
 
   results.soldProductNames.forEach((product) => {
-    const productList = $(
-      `<li class="ms-2">${product}</li>`,
-    );
+    const productList = $(`<li class="ms-2">${product}</li>`);
     soldProductContainer.append(productList);
   });
 
@@ -533,25 +530,22 @@ $("#addProductForm").on("submit", function (e) {
 });
 
 /**
- * Event listener for editing a product when the "edit" button is clicked in the product list table.
- * This function extracts product details from the table row, populates a modal form for updating the product,
- * and handles form submission including updating the product image either in base64 format or as a file.
+ * Handles the click event for the ".edit" button inside the #productList table.
+ * It opens a modal pre-filled with the product data and allows for product updates.
  *
- * @event Click on the edit button in the product list.
+ * @event click
+ * @param {jQuery.Event} event - The jQuery click event.
  *
- * @param {jQuery.Event} event - The jQuery event object.
+ * @listens click#productList .edit
  *
- * Function Steps:
- * 1. Extract product details (ID, image, name, category, quantity, price) from the clicked row.
- * 2. Populate the update modal with the product details.
- * 3. Handle the form submission for updating the product:
- *    - If a new product image is uploaded, convert it to base64.
- *    - If the existing image is used (base64), fetch it from the data attribute.
- *    - Update the product with the new details.
- * 4. Call the necessary functions to update the product in the backend, refresh the product list,
- *    and display a toast message based on the success or failure of the update.
+ * @fires updateProduct - Updates the product information.
  *
- * @function
+ * @requires modelClass.getUpdateModalInstance - Gets the modal instance for updating products.
+ * @requires manageProduct.updateProduct - Updates the product via an API or database interaction.
+ * @requires getProductsList - Refreshes the product list.
+ * @requires getSoldProducts - Refreshes the list of sold products.
+ * @requires calculateTotalQuantityAndPrice - Recalculates the total quantity and price.
+ * @requires toastClass.showToast - Displays a toast message indicating the success or failure of the update.
  */
 $("#productList").on("click", ".edit", function () {
   const tableRow = $(this).closest("tr");
@@ -582,50 +576,14 @@ $("#productList").on("click", ".edit", function () {
 
     const updateFormData = new FormData(this);
     let updateProductImage = updateFormData.get("updated-product-image");
-
-    if (updateProductImage && updateProductImage.size > 0) {
-      console.log("File detected:", updateProductImage);
-    } else {
-      updateProductImage = $('input[name="updated-product-image"]').attr(
-        "data-imgBased64",
-      );
-      console.log("Using base64 from data attribute:", updateProductImage);
-    }
     const updateProductName = updateFormData.get("updated-name");
     const updateProductCategory = updateFormData.get("updated-category");
     const updateProductQuantity = updateFormData.get("update-quantity");
     const updateProductPrice = updateFormData.get("update-price");
 
-    if (
-      typeof updateProductImage === "string" &&
-      updateProductImage.startsWith("data:image")
-    ) {
-      // Image is already in Base64, no need to read again
-      const updatedProduct = {
-        image: updateProductImage, // Already Base64 encoded
-        name: updateProductName,
-        category: updateProductCategory,
-        quantity: updateProductQuantity,
-        price: updateProductPrice,
-      };
+    if (updateProductImage && updateProductImage.size > 0) {
+      console.log("File detected:", updateProductImage);
 
-      const result = await manageProduct.updateProduct(
-        product_id,
-        updatedProduct,
-      );
-      modelClass.closeModal();
-      getSoldProducts();
-      getProductsList();
-      result.success === true
-        ? toastClass.showToast(
-            "bg-green-100 border border-green-400",
-            result.message,
-          )
-        : toastClass.showToast(
-            "bg-red-100 border border-red-400",
-            result.message,
-          );
-    } else {
       // Image is a File object, we need to convert it to Base64
       const reader = new FileReader();
       reader.onload = async function (event) {
@@ -656,6 +614,39 @@ $("#productList").on("click", ".edit", function () {
             );
       };
       reader.readAsDataURL(updateProductImage);
+    } else {
+      updateProductImage = $('input[name="updated-product-image"]').attr(
+        "data-imgBased64",
+      );
+      console.log("Using base64 from data attribute:", updateProductImage);
+
+      // Image is already in Base64, no need to read again
+      const updatedProduct = {
+        image: $('input[name="updated-product-image"]').attr("data-imgBased64"),
+        name: updateProductName,
+        category: updateProductCategory,
+        quantity: updateProductQuantity,
+        price: updateProductPrice,
+      };
+
+      console.log(updatedProduct);
+
+      const result = await manageProduct.updateProduct(
+        product_id,
+        updatedProduct,
+      );
+      modelClass.closeModal();
+      getSoldProducts();
+      getProductsList();
+      result.success === true
+        ? toastClass.showToast(
+            "bg-green-100 border border-green-400",
+            result.message,
+          )
+        : toastClass.showToast(
+            "bg-red-100 border border-red-400",
+            result.message,
+          );
     }
   });
 });
@@ -843,5 +834,3 @@ $(".number-only").on("input", function () {
   const filteredValue = input.replace(/[^0-9.]/g, "");
   $(this).val(filteredValue);
 });
-
-
