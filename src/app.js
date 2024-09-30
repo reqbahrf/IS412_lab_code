@@ -102,7 +102,7 @@ class product {
    */
   async updateProduct(id, updatedProduct) {
     try {
-      const index = this.productList.findIndex((product) => product.id === id);
+      const index = this.productList.findIndex((product) => product === id);
       if (index !== -1) {
         this.productList[index] = {
           ...this.productList[index],
@@ -330,7 +330,7 @@ class toast {
 /**
  * A class to manage modal instances for product operations.
  */
-class model {
+class modal {
   /**
    * Initializes a new instance of the modal class.
    * @constructor
@@ -388,7 +388,7 @@ class model {
 
 const manageProduct = new product();
 const toastClass = new toast();
-const modelClass = new model();
+const modalClass = new modal();
 
 /**
  * Calculates the total quantity and price of all products and updates the corresponding HTML elements.
@@ -540,7 +540,7 @@ $("#addProductForm").on("submit", function (e) {
  *
  * @fires updateProduct - Updates the product information.
  *
- * @requires modelClass.getUpdateModalInstance - Gets the modal instance for updating products.
+ * @requires modalClass.getUpdateModalInstance - Gets the modal instance for updating products.
  * @requires manageProduct.updateProduct - Updates the product via an API or database interaction.
  * @requires getProductsList - Refreshes the product list.
  * @requires getSoldProducts - Refreshes the list of sold products.
@@ -557,7 +557,7 @@ $("#productList").on("click", ".edit", function () {
   const product_quantity = tableRow.find("td:eq(4)").text().trim();
   const product_price = tableRow.find("td:eq(5)").text().trim();
 
-  const modal = modelClass.getUpdateModalInstance();
+  const modal = modalClass.getUpdateModalInstance();
 
   const modalBody = modal.find(".modal-body");
   const updateform = modalBody.find("#updateProductForm");
@@ -602,7 +602,7 @@ $("#productList").on("click", ".edit", function () {
         getProductsList();
         getSoldProducts();
         calculateTotalQuantityAndPrice();
-        modelClass.closeModal();
+        modalClass.closeModal();
         result.success === true
           ? toastClass.showToast(
               "bg-green-100 border border-green-400",
@@ -635,7 +635,7 @@ $("#productList").on("click", ".edit", function () {
         product_id,
         updatedProduct,
       );
-      modelClass.closeModal();
+      modalClass.closeModal();
       getSoldProducts();
       getProductsList();
       result.success === true
@@ -680,7 +680,7 @@ $("#productList").on("click", ".order", function () {
   const product_quantity = tableRow.find("td:eq(4)").text().trim();
   const product_price = tableRow.find("td:eq(5)").text().trim();
 
-  const modal = modelClass.getOrderModalInstance();
+  const modal = modalClass.getOrderModalInstance();
 
   modal.find("img").attr("src", product_imageBase64);
   modal.find('input[name="ReadonlyProductName"]').val(product_name);
@@ -714,7 +714,7 @@ $("#productList").on("click", ".order", function () {
       orderProductQuantity,
       orderProducTotalPrice,
     );
-    modelClass.closeModal();
+    modalClass.closeModal();
     console.log(result);
     result.success === true
       ? toastClass.showToast(
@@ -756,7 +756,10 @@ $("#productList").on("click", ".delete", async function () {
         "bg-green-100 border border-green-400",
         result.message,
       )
-    : toastClass.showToast("bg-red-100 border border-red-400", result.message);
+    : toastClass.showToast(
+      "bg-red-100 border border-red-400", 
+      result.message
+    );
   getProductsList();
   calculateTotalQuantityAndPrice();
 });
@@ -816,17 +819,17 @@ $(".unselect-image").on("click", () => {
 
 /**
  * Event listener for elements with the attribute `[data-model]`.
- * When clicked, this function closes the currently open modal by invoking the `closeModal` method of the `modelClass`.
+ * When clicked, this function closes the currently open modal by invoking the `closeModal` method of the `modalClass`.
  *
  * @event Click on elements with the `[data-model]` attribute.
  *
  * Function Steps:
- * 1. Triggers the `closeModal` function from the `modelClass` to close the currently active modal.
+ * 1. Triggers the `closeModal` function from the `modalClass` to close the currently active modal.
  *
  * @function
  */
 $("[data-model]").on("click", function () {
-  modelClass.closeModal();
+  modalClass.closeModal();
 });
 
 $(".number-only").on("input", function () {
