@@ -1,8 +1,3 @@
-if (import.meta.hot) {
-  import.meta.hot.accept();
-}
-
-import "/src/app.css";
 
 /**
  * Represents a Product in the inventory.
